@@ -6,13 +6,14 @@ const stringToArray = R.split("");
 //check if everything is good for empty strings TODO
 
 /* Question 1 */
-export const countVowels = (str: string) => stringToArray(str)
-.filter(vowels => 'aeiouAEIOU'.includes(vowels)).length;
+export const countVowels = (str: string) => 
+stringToArray(str).filter(vowels => 'aeiouAEIOU'.includes(vowels)).length;
 
 //console.log(countVowels('abcdefghIjklmnopqrstuvwxyz III O'));
 
 /* Question 2 */
-export const runLengthEncoding = (str: string): string => recurse(stringToArray(str), 1, 0, "");
+export const runLengthEncoding = (str: string): string =>
+recurse(stringToArray(str), 1, 0, "");
  
 const recurse = (str: string[], count: number, currPosition: number, output: string): string =>{
     if(currPosition == str.length){
@@ -35,7 +36,8 @@ console.log(runLengthEncoding("aaaabbbccd"));
 // /* Question 3 */
 export const isPaired = (str: string) => recursePair("", str);
 
-const recursePair=(stack: string, str: string) : boolean => {
+const recursePair=(stack: string, str: string) : boolean =>
+{
     if(str === ""){
         return (stack === "");
     }
@@ -48,16 +50,19 @@ const recursePair=(stack: string, str: string) : boolean => {
         recursePair( stack.substring(1),str.substring(1));
     }
     return recursePair(stack,str.substring(1));
-    
 }
 
-const isMatching = (opener: string, closer: string) : boolean => {
+const isMatching = (opener: string, closer: string) : boolean =>
+{
     if(opener=== "{" && closer=== "}"){
         return true;
     }
     if(opener=== "[" && closer=== "]"){
         return true;
     }
+    if(opener=== "(" && closer=== ")"){
+        return true;
+    }
     return false
 }
-console.log(isPaired("[{]}"));
+console.log(isPaired("()"));
