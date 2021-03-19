@@ -40,12 +40,14 @@ const recursePair=(stack: string, str: string) : boolean => {
         return (stack === "");
     }
     else if(str.charAt(0) === '(' ||str.charAt(0) === '[' || str.charAt(0) === '{' ){
-        return recursePair(str.substring(1),str.charAt(0)+stack);
+        return recursePair(str.charAt(0)+stack,str.substring(1));
     }
     else if(str.charAt(0) === ')' || str.charAt(0) === ']' || str.charAt(0) === '}' ) {
-        return !(stack === "") && (isMatching(stack.charAt(0),str.charAt(0))) && recursePair(str.substring(1), stack.substring(1));
+        return !(stack === "") && 
+        (isMatching(stack.charAt(0),str.charAt(0))) && 
+        recursePair( stack.substring(1),str.substring(1));
     }
-    return recursePair(str.substring(1), stack);
+    return recursePair(stack,str.substring(1));
     
 }
 
@@ -58,4 +60,4 @@ const isMatching = (opener: string, closer: string) : boolean => {
     }
     return false
 }
-console.log(isPaired("{}"));
+console.log(isPaired("[{]}"));
