@@ -15,7 +15,7 @@ export const countVowels = (str: string) => stringToArray(str)
 export const runLengthEncoding = (str: string): string => recurse(stringToArray(str), 1, 0, "");
  
 const recurse = (str: string[], count: number, currPosition: number, output: string): string =>{
-    if(currPosition == str.length){//todo check if need to check range of array
+    if(currPosition == str.length){
         return output;
     }
     else if(str[currPosition] != str[currPosition + 1]){
@@ -68,3 +68,55 @@ const recursePair(stack: string, str: string) : boolean => {
     else return recursePair(str.substring(1), stack);
 }
 */
+
+export const isPaired =(str:string)=>{
+    const strArray = stringToArray(str)
+    const arr1=strArray.filter(arr => '{}'.includes(arr));
+    const arr2=strArray.filter(arr => '[]'.includes(arr));
+    const arr3=strArray.filter(arr => '()'.includes(arr));
+    const isPairedArr1=arr1.reduce(foo1,0);
+    const isPairedArr2=arr2.reduce(foo2,0);
+    const isPairedArr3=arr3.reduce(foo3,0);
+    return (isPairedArr1===0)&&(isPairedArr2===0)&&(isPairedArr3===0)
+}
+
+const foo1 = (counter:number, parenthesis:string)=>{
+    if(parenthesis==="{"){
+        counter = counter+1
+    }
+    else if(counter>0){
+        counter = counter-1
+    }
+    else{
+        counter=Math.log(0)
+    }
+    return counter;
+}
+
+const foo2 = (counter:number, parenthesis:string)=>{
+    if(parenthesis==="["){
+        counter = counter+1
+    }
+    else if(counter>0){
+        counter = counter-1
+    }
+    else{
+        counter=Math.log(0)
+    }
+    return counter;
+}
+
+const foo3 = (counter:number, parenthesis:string)=>{
+    if(parenthesis==="("){
+        counter = counter+1
+    }
+    else if(counter>0){
+        counter = counter-1
+    }
+    else{
+        counter=Math.log(0)
+    }
+    return counter;
+}
+
+console.log(isPaired("This is [some} (text)"));
