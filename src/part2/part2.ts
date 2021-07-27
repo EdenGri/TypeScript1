@@ -1,17 +1,15 @@
 import * as R from "ramda";
-import { pipe } from "ramda";
 
 const stringToArray = R.split("");
 
-//check if everything is good for empty strings TODO
-
 /* Question 1 */
+//Returns the number of vowels in the inputted string 
 export const countVowels = (str: string) => 
 stringToArray(str).filter(vowels => 'aeiouAEIOU'.includes(vowels)).length;
 
-//console.log(countVowels('abcdefghIjklmnopqrstuvwxyz III O'));
-
 /* Question 2 */
+//Returns a “compressed” version of the inputted string,
+// where identical consecutive characters appear as the character followed by its count
 export const runLengthEncoding = (str: string): string =>
 recurse(stringToArray(str), 1, 0, "");
  
@@ -30,10 +28,12 @@ const recurse = (str: string[], count: number, currPosition: number, output: str
         }
 };
 
-console.log(runLengthEncoding("aaaabbbccd")); 
+ 
 
 
 // /* Question 3 */
+//Returns true if the parentheses ({, }, (, ), [, ]) in the string are paired
+//and false otherwise
 export const isPaired = (str: string) => recursePair("", str);
 
 const recursePair=(stack: string, str: string) : boolean =>
@@ -52,6 +52,7 @@ const recursePair=(stack: string, str: string) : boolean =>
     return recursePair(stack,str.substring(1));
 }
 
+//checks if the pair of parantheses match
 const isMatching = (opener: string, closer: string) : boolean =>
 {
     if(opener=== "{" && closer=== "}"){
@@ -65,4 +66,3 @@ const isMatching = (opener: string, closer: string) : boolean =>
     }
     return false
 }
-console.log(isPaired("()"));
